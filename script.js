@@ -37,6 +37,8 @@ const prices = {
     }
 };
 
+let selectedItems = [];
+
 function updateItems() {
     const category = document.getElementById('category').value;
     const itemSelect = document.getElementById('item');
@@ -50,7 +52,7 @@ function updateItems() {
     });
 }
 
-function calculate() {
+function addItem() {
     const category = document.getElementById('category').value;
     const item = document.getElementById('item').value;
     const quantity = parseFloat(document.getElementById('quantity').value);
@@ -60,13 +62,67 @@ function calculate() {
         return;
     }
 
-    const cost = (prices[category][item] * quantity).toFixed(2);
-    const perUnit = (prices[category][item]).toFixed(4);
-    
+    selectedItems.push({
+        category,
+        item,
+        quantity
+    });
+
+    updateSelectedItemsDisplay();
+    document.getElementById('quantity').value = '100'; // 重置份量為預設值
+}
+
+function updateSelectedItemsDisplay() {
+    const container = document.getElementById('selectedItems');
+    container.innerHTML = '';
+
+    if (selectedItems.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: #666;">尚未加入任何品項</p>';
+        return;
+    }
+
+    selectedItems.forEach((item, index) => {
+        const itemElement = document.createElement('div');
+        itemElement.className = 'selected-item';
+        itemElement.innerHTML = `
+            <span>${item.item} (${item.quantity}克)</span>
+            <button onclick="removeItem(${index})">刪除</button>
+        `;
+        container.appendChild(itemElement);
+    });
+}
+
+function removeItem(index) {
+    selectedItems.splice(index, 1);
+    updateSelectedItemsDisplay();
+}
+
+function clearAll() {
+    selectedItems = [];
+    updateSelectedItemsDisplay();
+    document.getElementById('result').innerHTML = '請選擇品項並輸入份量';
+}
+
+function calculate() {
+    if (selectedItems.length === 0) {
+        alert('請先加入品項');
+        return;
+    }
+
+    let totalCost = 0;
+    let details = [];
+
+    selectedItems.forEach(item => {
+        const cost = prices[item.category][item.item] * item.quantity;
+        totalCost += cost;
+        details.push(`${item.item} (${item.quantity}克): ${cost.toFixed(2)}元`);
+    });
+
     document.getElementById('result').innerHTML = 
-        `${item} ${quantity}克的成本為：${cost}元<br>` +
-        `(每克成本：${perUnit}元)`;
+        `細項成本：<br>${details.join('<br>')}<br><br>` +
+        `總成本：${totalCost.toFixed(2)}元`;
 }
 
 // 初始化
 updateItems();
+updateSelectedItemsDisplay();
