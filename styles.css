@@ -57,6 +57,14 @@ button:hover {
     background: #45a049;
 }
 
+.clear-btn {
+    background: #f44336;
+}
+
+.clear-btn:hover {
+    background: #da190b;
+}
+
 .result {
     margin-top: 20px;
     padding: 15px;
@@ -65,4 +73,42 @@ button:hover {
     text-align: center;
     font-size: 18px;
     font-weight: bold;
+}
+
+.selected-items {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    min-height: 50px;
+}
+
+.selected-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 5px 0;
+    background: #f8f9fa;
+    border-radius: 5px;
+}
+
+.selected-item button {
+    width: auto;
+    padding: 5px 10px;
+    margin: 0 0 0 10px;
+    background: #dc3545;
+    font-size: 14px;
+}
+
+.input-section {
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+.total-section {
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+    margin-top: 20px;
 }
