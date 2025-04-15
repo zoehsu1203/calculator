@@ -7,43 +7,34 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="calculator">
-        <h2>飴棠成本計算器</h2>
+    <div class="container">
+        <h1>飴棠成本計算器</h1>
         
-        <div class="selected-items" id="selectedItems">
-            <!-- 已選擇的品項會顯示在這裡 -->
-        </div>
-
         <div class="input-section">
             <div class="input-group">
-                <label for="category">選擇類別：</label>
                 <select id="category" onchange="updateItems()">
                     <option value="base">基本品項</option>
-                    <option value="special">特製品項</option>
+                    <option value="special">特調</option>
                     <option value="toppings">配料</option>
                 </select>
-            </div>
 
-            <div class="input-group">
-                <label for="item">選擇品項：</label>
-                <select id="item">
-                    <!-- 選項由 JavaScript 動態填入 -->
+                <select id="item" onchange="updateDefaultQuantity()">
+                    <!-- 選項會由 JavaScript 動態填入 -->
                 </select>
-            </div>
 
-            <div class="input-group">
-                <label for="quantity">份量(克)：</label>
-                <input type="number" id="quantity" value="100">
+                <input type="number" id="quantity" placeholder="份量(克)">
+                <button onclick="addItem()">加入</button>
             </div>
-
-            <button onclick="addItem()">加入品項</button>
         </div>
 
-        <div class="total-section">
-            <button onclick="calculate()" class="calculate-btn">計算總成本</button>
-            <button onclick="clearAll()" class="clear-btn">清除所有品項</button>
-            <div class="result" id="result">請選擇品項並輸入份量</div>
+        <div class="items-list">
+            <h2>已加入品項</h2>
+            <ul id="itemsList"></ul>
+            <div class="total">總成本: <span id="totalCost">0</span> 元</div>
         </div>
+
+        <button onclick="calculate()" class="calculate-btn">計算</button>
+        <button onclick="clearAll()" class="clear-btn">清除所有</button>
     </div>
     <script src="script.js"></script>
 </body>
