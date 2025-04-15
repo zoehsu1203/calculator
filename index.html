@@ -8,31 +8,42 @@
 </head>
 <body>
     <div class="calculator">
-      <h2>飴棠成本計算器</h2>
-      
-      <div class="input-group">
-        <label for="category">選擇類別：</label>
-        <select id="category" onchange="updateItems()">
-          <option value="base">基本品項</option>
-          <option value="special">特製品項</option>
-          <option value="toppings">配料</option>
-        </select>
-      </div>
+        <h2>飴棠成本計算器</h2>
+        
+        <div class="selected-items" id="selectedItems">
+            <!-- 已選擇的品項會顯示在這裡 -->
+        </div>
 
-      <div class="input-group">
-        <label for="item">選擇品項：</label>
-        <select id="item">
-          <!-- 選項由 JavaScript 動態填入 -->
-        </select>
-      </div>
+        <div class="input-section">
+            <div class="input-group">
+                <label for="category">選擇類別：</label>
+                <select id="category" onchange="updateItems()">
+                    <option value="base">基本品項</option>
+                    <option value="special">特製品項</option>
+                    <option value="toppings">配料</option>
+                </select>
+            </div>
 
-      <div class="input-group">
-        <label for="quantity">份量(克)：</label>
-        <input type="number" id="quantity" value="100">
-      </div>
+            <div class="input-group">
+                <label for="item">選擇品項：</label>
+                <select id="item">
+                    <!-- 選項由 JavaScript 動態填入 -->
+                </select>
+            </div>
 
-      <button onclick="calculate()">計算成本</button>
-      <div class="result" id="result">請選擇品項並輸入份量</div>
+            <div class="input-group">
+                <label for="quantity">份量(克)：</label>
+                <input type="number" id="quantity" value="100">
+            </div>
+
+            <button onclick="addItem()">加入品項</button>
+        </div>
+
+        <div class="total-section">
+            <button onclick="calculate()" class="calculate-btn">計算總成本</button>
+            <button onclick="clearAll()" class="clear-btn">清除所有品項</button>
+            <div class="result" id="result">請選擇品項並輸入份量</div>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
