@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>飴棠成本計算器</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="calculator">
+      <h2>飴棠成本計算器</h2>
+      
+      <div class="input-group">
+        <label for="category">選擇類別：</label>
+        <select id="category" onchange="updateItems()">
+          <option value="base">基本品項</option>
+          <option value="special">特製品項</option>
+          <option value="toppings">配料</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="item">選擇品項：</label>
+        <select id="item">
+          <!-- 選項由 JavaScript 動態填入 -->
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="quantity">份量(克)：</label>
+        <input type="number" id="quantity" value="100">
+      </div>
+
+      <button onclick="calculate()">計算成本</button>
+      <div class="result" id="result">請選擇品項並輸入份量</div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
