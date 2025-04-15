@@ -1,39 +1,35 @@
-const prices = {
+export const prices = {
     base: {
-        '豆花': {price: 0.014709764705882353, usage: 100},
-        '仙草凍': {price: 0.013554809843400448, usage: 100},
-        '鮮奶凍': {price: 0.07076268656716417, usage: 100},
-        '燒仙草': {price: 0.009097964376590332, usage: 100},
-        '愛玉': {price: 0.015, usage: 100},
-        '粉圓': {price: 0.032, usage: 30},
-        '粉條': {price: 0.028, usage: 30},
-        '芋圓': {price: 0.045, usage: 30},
-        '地瓜圓': {price: 0.042, usage: 30},
-        '白玉': {price: 0.038, usage: 30}
+        '豆花': {cost: 2.35356, usage: 160},
+        '三色豆花': {cost: 7.06068, usage: 480},
+        '仙草凍': {cost: 2.17, usage: 160},
+        '鮮奶凍': {cost: 4.74, usage: 67},
+        '燒仙草': {cost: 2.0016, usage: 220}
     },
     special: {
-        '黑糖冰沙': {price: 0.01350824949698189, usage: 200},
-        '仙草冰沙': {price: 0.01716279069767442, usage: 200},
-        '紅豆湯': {price: 0.015259776536312848, usage: 200},
-        '薑湯': {price: 0.006196078431372549, usage: 200},
-        '抹茶冰沙': {price: 0.018, usage: 200},
-        '芋頭牛奶': {price: 0.025, usage: 200},
-        '黑糖奶茶': {price: 0.022, usage: 200},
-        '仙草奶茶': {price: 0.020, usage: 200},
-        '抹茶奶綠': {price: 0.023, usage: 200}
+        '黑糖冰沙': {cost: 2.7, usage: 200},
+        '仙草冰沙': {cost: 3.43, usage: 200},
+        '紅豆湯': {cost: 3.05, usage: 200},
+        '薑湯': {cost: 1.26, usage: 200},
+        '抹茶冰沙': {cost: 3.6, usage: 200},
+        '芋頭牛奶': {cost: 5.0, usage: 200},
+        '黑糖奶茶': {cost: 4.4, usage: 200},
+        '仙草奶茶': {cost: 4.0, usage: 200},
+        '抹茶奶綠': {cost: 4.6, usage: 200}
     },
     toppings: {
-        '珍珠': {price: 0.0427, usage: 30},
-        '椰果': {price: 0.043243243243243246, usage: 30},
-        '紅豆': {price: 0.031163471074380163, usage: 30},
-        '花生': {price: 0.043757500000000005, usage: 20},
-        '綠豆': {price: 0.035, usage: 30},
-        '芋頭': {price: 0.048, usage: 30},
-        '地瓜': {price: 0.038, usage: 30},
-        '蜜紅豆': {price: 0.040, usage: 30},
-        '黃金QQ': {price: 0.045, usage: 30},
-        '布丁': {price: 0.052, usage: 50},
-        '杏仁凍': {price: 0.048, usage: 50}
+        '豆漿': {cost: 3.2, usage: 200},
+        '鮮奶': {cost: 12.8205, usage: 200},
+        '紅豆': {cost: 1.55817, usage: 50},
+        '花生': {cost: 2.62545, usage: 60},
+        '綠豆': {cost: 0.24175, usage: 60},
+        '薑汁': {cost: 0.38888, usage: 45},
+        '芋泥': {cost: 1.41384, usage: 40},
+        '鮮奶凍': {cost: 5.66101, usage: 80},
+        '杏仁豆腐': {cost: 1.71325, usage: 70},
+        '布丁': {cost: 3.77647, usage: 70},
+        '椰果': {cost: 2.59459, usage: 60},
+        '粉粿': {cost: 2.64, usage: 60}
     }
 };
 
