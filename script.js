@@ -40,12 +40,15 @@ function updateItems() {
     const itemSelect = document.getElementById('item');
     itemSelect.innerHTML = '';
     
-    Object.keys(prices[category]).forEach(item => {
-        const option = document.createElement('option');
-        option.value = item;
-        option.textContent = item;
-        itemSelect.appendChild(option);
-    });
+    // 確保該類別存在
+    if (prices[category]) {
+        Object.keys(prices[category]).forEach(item => {
+            const option = document.createElement('option');
+            option.value = item;
+            option.textContent = item;
+            itemSelect.appendChild(option);
+        });
+    }
 
     // 更新預設份量
     updateDefaultQuantity();
@@ -54,8 +57,10 @@ function updateItems() {
 function updateDefaultQuantity() {
     const category = document.getElementById('category').value;
     const item = document.getElementById('item').value;
-    const defaultQuantity = prices[category][item].usage;
-    document.getElementById('quantity').value = defaultQuantity;
+    if (prices[category] && prices[category][item]) {
+        const defaultQuantity = prices[category][item].usage;
+        document.getElementById('quantity').value = defaultQuantity;
+    }
 }
 
 function addItem() {
@@ -68,14 +73,20 @@ function addItem() {
         return;
     }
 
+    // 確保該品項存在
+    if (!prices[category] || !prices[category][item]) {
+        alert('無效的品項');
+        return;
+    }
+
     selectedItems.push({
         category,
         item,
-        quantity
+        quantity,
+        cost: prices[category][item].cost // 儲存單位成本
     });
 
     updateSelectedItemsDisplay();
-    // 重置份量為該品項的預設用量
     updateDefaultQuantity();
 }
 
@@ -91,8 +102,9 @@ function updateSelectedItemsDisplay() {
     selectedItems.forEach((item, index) => {
         const itemElement = document.createElement('div');
         itemElement.className = 'selected-item';
+        const itemCost = (item.cost * item.quantity).toFixed(2);
         itemElement.innerHTML = `
-            <span>${item.item} (${item.quantity}克)</span>
+            <span>${item.item} (${item.quantity}克) - ${itemCost}元</span>
             <button onclick="removeItem(${index})">刪除</button>
         `;
         container.appendChild(itemElement);
@@ -100,8 +112,11 @@ function updateSelectedItemsDisplay() {
 }
 
 function removeItem(index) {
-    selectedItems.splice(index, 1);
-    updateSelectedItemsDisplay();
+    if (index >= 0 && index < selectedItems.length) {
+        selectedItems.splice(index, 1);
+        updateSelectedItemsDisplay();
+        calculate(); // 重新計算總成本
+    }
 }
 
 function clearAll() {
@@ -120,15 +135,18 @@ function calculate() {
     let details = [];
 
     selectedItems.forEach(item => {
-        const itemData = prices[item.category][item.item];
-        const cost = itemData.price * item.quantity;
+        const cost = item.cost * item.quantity;
         totalCost += cost;
         details.push(`${item.item} (${item.quantity}克): ${cost.toFixed(2)}元`);
     });
 
+    // 計算建議售價（2.5倍成本，湊整到5元）
+    const suggestedPrice = Math.ceil(totalCost * 2.5 / 5) * 5;
+
     document.getElementById('result').innerHTML = 
         `細項成本：<br>${details.join('<br>')}<br><br>` +
-        `總成本：${totalCost.toFixed(2)}元`;
+        `總成本：${totalCost.toFixed(2)}元<br>` +
+        `建議售價：${suggestedPrice}元`;
 }
 
 // 初始化
